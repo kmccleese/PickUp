@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">PickUp</string>
+    <string name="search_title">Search</string>
+    <string name="profile_title">Profile</string>
+    <string name="news_feed">This is the news feed. \nThis is where all of our drops will be shown.
+    </string>
+    <string name="title_activity_search">Search</string>
+</resources>
