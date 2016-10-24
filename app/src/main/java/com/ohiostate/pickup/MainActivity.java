@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import pickup.R;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button mSearchButton;
