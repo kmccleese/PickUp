@@ -5,4 +5,21 @@
     <string name="news_feed">This is the news feed. \nThis is where all of our drops will be shown.
     </string>
     <string name="title_activity_search">Search</string>
+    <string name="view_drop">View Drop</string>
+    <string name="new_drop">New Drop</string>
+    <string name="drop_name">Name</string>
+    <string name="drop_message">This is the message</string>
+    <string name="drop_sport">Sport: </string>
+    <string name="drop_difficulty">Difficulty: </string>
+    <string name="drop_date">When: </string>
+    <string name="drop_num_players">Number of players: </string>
+    <string name="drop_preferred_gender">Preferred gender: </string>
+    <string name="drop_location">Location: </string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="location_hint">Enter location</string>
+    <string name="message_hint">Enter message</string>
+    <string name="drop">Drop</string>
+    <string name="share">Share</string>
+    <string name="cancel">Cancel</string>
 </resources>

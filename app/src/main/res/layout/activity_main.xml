@@ -10,19 +10,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
-        <Button
-            android:id="@+id/search_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/search_title"/>
+    <Button
+        android:id="@+id/search_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/search_title"/>
 
-        <Button
-            android:id="@+id/profile_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/profile_title"/>
+    <Button
+        android:id="@+id/profile_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/profile_title"/>
 
     </LinearLayout>
+
+    <Button
+        android:text="@string/view_drop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/view_drop_button"/>
+    <Button
+        android:text="@string/new_drop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/new_drop_button"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -35,3 +46,5 @@
     </ScrollView>
 
 </LinearLayout>
+
+
