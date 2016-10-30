@@ -15,9 +15,10 @@ public class MainActivity extends AppCompatActivity {
     private Button mSearchButton;
     private Button mProfileButton;
     private Button mViewDropButton;
+    private Button mNewDropButton;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "MainActivity onCreate() called");
         setContentView(R.layout.activity_main);
@@ -44,8 +45,18 @@ public class MainActivity extends AppCompatActivity {
         mViewDropButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // start ViewDrop activity
-                Intent i = new Intent(MainActivity.this, ViewDrop.class);
+                // start ViewDropActivity
+                Intent i = new Intent(MainActivity.this, ViewDropActivity.class);
+                startActivity(i);
+            }
+        });
+
+        mNewDropButton = (Button) findViewById(R.id.new_drop_button);
+        mNewDropButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // start NewDropActivity
+                Intent i = new Intent(MainActivity.this, NewDropActivity.class);
                 startActivity(i);
             }
         });

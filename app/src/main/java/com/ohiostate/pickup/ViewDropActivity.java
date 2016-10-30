@@ -9,9 +9,9 @@ import android.widget.ImageView;
 
 import pickup.R;
 
-public class ViewDrop extends AppCompatActivity {
+public class ViewDropActivity extends AppCompatActivity {
 
-    private static final String TAG = "ViewDrop";
+    private static final String TAG = "ViewDropActivity";
     private Button mPickUpButton;
     private Button mEditButton;
     private Button mDeleteButton;
@@ -20,7 +20,7 @@ public class ViewDrop extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "ViewDrop onCreate called");
+        Log.d(TAG, "ViewDropActivity onCreate called");
         setContentView(R.layout.activity_view_drop);
 
         // instantiate

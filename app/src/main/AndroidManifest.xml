@@ -15,7 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.ohiostate.pickup.ViewDrop">
+        <activity android:name="com.ohiostate.pickup.ViewDropActivity">
+        </activity>
+        <activity android:name="com.ohiostate.pickup.NewDropActivity">
         </activity>
     </application>
 
