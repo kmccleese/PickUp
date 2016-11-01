@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="pickup"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="pickup">
 
     <application
         android:allowBackup="true"
@@ -18,6 +18,16 @@
         <activity android:name="com.ohiostate.pickup.ViewDropActivity">
         </activity>
         <activity android:name="com.ohiostate.pickup.NewDropActivity">
+        </activity>
+        <activity
+            android:name="com.ohiostate.pickup.ViewProfile"
+            android:label="@string/title_activity_view_profile"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.ohiostate.pickup.EditProfile"
+            android:label="@string/title_activity_edit_profile"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 

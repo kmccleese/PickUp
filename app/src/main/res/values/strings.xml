@@ -21,5 +21,15 @@
     <string name="message_hint">Enter message</string>
     <string name="drop">Drop</string>
     <string name="share">Share</string>
+    <string name ="save">Save</string>
     <string name="cancel">Cancel</string>
+    <string name="title_activity_view_profile">ViewProfile</string>
+    <string name="view_profile">Profile</string>
+    <string name="back">BACK</string>
+    <string name="title_activity_edit_profile">EditProfile</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="player_name">Name: </string>
+    <string name="email">Email: </string>
+    <string name="preferences"><u>Preferences: </u></string>
+    <string name="profile_radius">Radius</string>
 </resources>
