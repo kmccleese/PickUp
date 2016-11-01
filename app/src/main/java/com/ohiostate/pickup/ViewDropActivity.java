@@ -1,53 +1,28 @@
 package com.ohiostate.pickup;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 
 import pickup.R;
 
-public class ViewDropActivity extends AppCompatActivity {
+/**
+ * Created by Eva on 11/1/2016.
+ */
 
-    private static final String TAG = "ViewDropActivity";
-    private Button mPickUpButton;
-    private Button mEditButton;
-    private Button mDeleteButton;
-    private ImageView mPhotoView;
+public class ViewDropActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "ViewDropActivity onCreate called");
         setContentView(R.layout.activity_view_drop);
 
-        // instantiate
-        mPickUpButton = (Button) findViewById(R.id.pickup_button);
-        mEditButton = (Button) findViewById(R.id.edit_button);
-        mDeleteButton = (Button) findViewById(R.id.delete_button);
-        mPhotoView = (ImageView)findViewById(R.id.photo);
-
-        // listeners
-
-        mPickUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // PickUp drop
-            }
-        });
-        mEditButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // creator of drop can edit the drop
-            }
-        });
-        mDeleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // creator of drop can delete the drop
-            }
-        });
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_container);
+        if(fragment == null) {
+            fragment = new ViewDropActivityFragment();
+            fragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit();
+        }
     }
 }

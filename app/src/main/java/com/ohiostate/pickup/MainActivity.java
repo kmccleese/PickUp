@@ -45,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
         mViewDropButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // start ViewDropActivity
-                Intent i = new Intent(MainActivity.this, ViewDropActivity.class);
+                // start ViewDropActivityFragment
+                Intent i = new Intent(MainActivity.this, ViewDropActivityFragment.class);
                 startActivity(i);
             }
         });
