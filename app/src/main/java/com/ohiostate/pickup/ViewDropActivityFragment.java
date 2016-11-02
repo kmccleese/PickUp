@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import pickup.R;
-
 public class ViewDropActivityFragment extends Fragment {
 
     private static final String TAG = "ViewDropActivityFragment";

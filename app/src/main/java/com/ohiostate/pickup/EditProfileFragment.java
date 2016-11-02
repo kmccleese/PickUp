@@ -6,8 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import pickup.R;
-
 /**
  * Created by Eva on 11/1/2016.
  */

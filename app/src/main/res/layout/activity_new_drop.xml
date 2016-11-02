@@ -60,10 +60,10 @@
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"/>
 
-        <Spinner
-            android:layout_width="match_parent"
+        <Button
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/date_spinner"/>
+            android:id="@+id/new_drop_date_button"/>
 
         <TextView
             android:text="@string/drop_num_players"
