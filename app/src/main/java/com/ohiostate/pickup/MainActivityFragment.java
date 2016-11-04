@@ -7,6 +7,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -19,54 +22,20 @@ import java.util.List;
 public class MainActivityFragment extends Fragment {
 
     private static final String TAG = "MainActivityFragment";
-    private Button mSearchButton;
-    private Button mProfileButton;
-    private Button mViewDropButton;
-    private Button mNewDropButton;
     private RecyclerView mDropRecyclerView;
     private DropAdapter mAdapter;
 
-
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         Log.d(TAG, "oncreateView() called");
         View v = inflater.inflate(R.layout.activity_main, container, false);
-
-        mProfileButton = (Button) v.findViewById(R.id.profile_button);
-        mProfileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                //Start activity
-            }
-        });
-        mSearchButton = (Button) v.findViewById(R.id.search_button);
-        mSearchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                //Start activity
-
-            }
-        });
-
-        mViewDropButton = (Button) v.findViewById(R.id.view_drop_button);
-        mViewDropButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // start ViewDropActivityFragment
-            }
-        });
-
-        mNewDropButton = (Button) v.findViewById(R.id.new_drop_button);
-        mNewDropButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // start NewDropActivity
-            }
-        });
 
         mDropRecyclerView = (RecyclerView) v.findViewById(R.id.drop_recycler_view);
         mDropRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -80,6 +49,35 @@ public class MainActivityFragment extends Fragment {
     public void onResume() {
         super.onResume();
         updateUI();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment_drop_list, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_item_new_drop:
+                // go to new drop
+                Intent intent = new Intent(getActivity(), NewDropActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.menu_item_view_profile:
+                // go to view profile
+                Intent intent1 = new Intent(getActivity(), ViewProfile.class);
+                startActivity(intent1);
+                return true;
+            case R.id.menu_item_edit_profile:
+                // go to edit profile
+                Intent intent2 = new Intent(getActivity(), EditProfile.class);
+                startActivity(intent2);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void updateUI() {

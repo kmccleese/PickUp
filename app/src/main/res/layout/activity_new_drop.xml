@@ -52,18 +52,48 @@
             android:layout_height="wrap_content"
             android:id="@+id/difficulty_spinner"/>
 
-        <TextView
-            android:text="@string/drop_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/new_drop_date_text"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"/>
+            <TextView
+                android:text="@string/drop_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/new_drop_date_title_text"/>
 
-        <Button
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/new_drop_date_button"/>
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/new_drop_date_text"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/new_drop_time_text"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/new_drop_date_button"
+                android:text="@string/date_button_text"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/new_drop_time_button"
+                android:text="@string/time_button_text"/>
+
+        </LinearLayout>
 
         <TextView
             android:text="@string/drop_num_players"

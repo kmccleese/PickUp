@@ -9,7 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-public class NewDropActivity extends FragmentActivity {
+public class NewDropActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
