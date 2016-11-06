@@ -41,28 +41,40 @@ public class DropDatabaseHelper extends SQLiteOpenHelper{
         onCreate(db);
     }
 
-    public boolean insertDrop(String name, String email, String gender) {
+    public boolean insertDrop(Drop drop) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("name", name);
-        contentValues.put("email", email);
-        contentValues.put("gender", gender);
+        contentValues.put("player_id", drop.getPlayer_id());
+        contentValues.put("sport", drop.getSport());
+        contentValues.put("location", drop.getLocation());
+        contentValues.put("play_time", drop.getPlay_time());
+        contentValues.put("difficulty_level", drop.getDifficulty());
+        contentValues.put("submit_time", drop.getSubmit_time());
+        contentValues.put("num_players", drop.getNum_players());
+        contentValues.put("preferred_gender", drop.getGender());
         db.insert("PlayerTable", null, contentValues);
         return true;
     }
 
-    public boolean updatePlayer(Integer id, String name, String email, String gender) {
+    public boolean updateDrop(Drop drop) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("name", name);
-        contentValues.put("email", email);
-        contentValues.put("gender", gender);
+        contentValues.put("player_id", drop.getPlayer_id());
+        contentValues.put("sport", drop.getSport());
+        contentValues.put("location", drop.getLocation());
+        contentValues.put("play_time", drop.getPlay_time());
+        contentValues.put("difficulty_level", drop.getDifficulty());
+        contentValues.put("submit_time", drop.getSubmit_time());
+        contentValues.put("num_players", drop.getNum_players());
+        contentValues.put("preferred_gender", drop.getGender());
+        Integer id = drop.getId();
         db.update("PlayerTable", contentValues, "id = ? ", new String[]{Integer.toString(id)});
         return true;
     }
 
-    public Integer deletePlayer(Integer id) {
+    public Integer deleteDrop(Drop drop) {
         SQLiteDatabase db = this.getWritableDatabase();
+        Integer id = drop.getId();
         return db.delete("PlayerTable",
                 "id = ? ",
                 new String[]{Integer.toString(id)});

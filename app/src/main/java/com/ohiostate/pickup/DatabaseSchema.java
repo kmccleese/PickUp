@@ -7,7 +7,7 @@ public class DatabaseSchema {
 
         public static final class Cols {
             public static final String PLAYER_ID= "player_id";
-            public static final String SPORT = "sport_type";
+            public static final String SPORT = "sport";
             public static final String LOCATION = "location";
             public static final String PLAY_TIME = "play_time";
             public static final String DIFFICULTY = "difficulty_level";
@@ -15,6 +15,7 @@ public class DatabaseSchema {
             public static final String PLAYERS = "num_players";
             public static final String GENDER = "preferred_gender";
             public static final String ID = "drop_id";
+            public static final String MESSAGE = "message";
 
         }
     }
