@@ -32,4 +32,7 @@
     <string name="email">Email: </string>
     <string name="preferences"><u>Preferences: </u></string>
     <string name="profile_radius">Radius</string>
+    <string name="date_picker_title">Date: </string>
+    <string name="date_button_text">Select date</string>
+    <string name="time_button_text">Select time</string>
 </resources>

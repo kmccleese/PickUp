@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="top|center">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:id="@+id/fragment_container"
+             tools:background="@color/background"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +12,10 @@
         android:layout_margin="15dp"
         android:padding="15dp"
         android:orientation="vertical"
-        tools:background="@color/white">
+        android:id="@+id/drop_info"
+        tools:background="@drawable/backdrop"
+        android:radius="5dp">
+
 
         <TextView
             android:text="@string/new_drop"
@@ -51,18 +52,48 @@
             android:layout_height="wrap_content"
             android:id="@+id/difficulty_spinner"/>
 
-        <TextView
-            android:text="@string/drop_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/new_drop_date_text"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"/>
+            <TextView
+                android:text="@string/drop_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/new_drop_date_title_text"/>
 
-        <Spinner
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/date_spinner"/>
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/new_drop_date_text"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/new_drop_time_text"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/new_drop_date_button"
+                android:text="@string/date_button_text"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/new_drop_time_button"
+                android:text="@string/time_button_text"/>
+
+        </LinearLayout>
 
         <TextView
             android:text="@string/drop_num_players"
@@ -154,4 +185,4 @@
 
     </LinearLayout>
 
-</LinearLayout>
+</FrameLayout>
