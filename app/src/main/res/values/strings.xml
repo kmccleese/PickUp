@@ -8,7 +8,7 @@
     <string name="view_drop">View Drop</string>
     <string name="new_drop">New Drop</string>
     <string name="drop_name">Name</string>
-    <string name="drop_message">This is the message</string>
+    <string name="drop_message">Describe any extra details here: </string>
     <string name="drop_sport">Sport: </string>
     <string name="drop_difficulty">Difficulty: </string>
     <string name="drop_date">When: </string>
@@ -37,4 +37,49 @@
     <string name="time_button_text">Select time</string>
     <string name="facebook_app_id">1698807303768761</string>
     <string name="fb_login_protocol_scheme">fb1698807303768761</string>
+    <string-array name="sport_array">
+        <item>Select Sport</item>
+        <item>Badminton</item>
+        <item>Baseball</item>
+        <item>Basketball</item>
+        <item>Billiards</item>
+        <item>Bocce Ball</item>
+        <item>Cornhole</item>
+        <item>Croquet</item>
+        <item>Darts</item>
+        <item>Disc Golf</item>
+        <item>Field Hockey</item>
+        <item>Football</item>
+        <item>Golf</item>
+        <item>Ice Hockey</item>
+        <item>Lacrosse</item>
+        <item>Rugby</item>
+        <item>Running</item>
+        <item>Sand Volleyball</item>
+        <item>Soccer</item>
+        <item>Softball</item>
+        <item>Swimming</item>
+        <item>Table Tennis</item>
+        <item>Tennis</item>
+        <item>Volleyball</item>
+        <item>Water Polo</item>
+        <item>Weightlifting</item>
+        <item>Wrestling</item>
+    </string-array>
+    <string-array name="difficulty_array">
+        <item>Select Skill Level</item>
+        <item>Beginner player\'s only</item>
+        <item>Intermediate player\'s only</item>
+        <item>Advanced player\'s only</item>
+        <item>Any skill level welcome</item>
+    </string-array>
+    <string-array name="gender_array">
+        <item>Select Gender Perference</item>
+        <item>Males Only</item>
+        <item>Females Only</item>
+        <item>Any gender welcome</item>
+    </string-array>
+
+
+
 </resources>

@@ -1,5 +1,7 @@
 package com.ohiostate.pickup;
 
+import java.util.Date;
+
 public class DatabaseSchema {
 
     public static final class DropTable {
@@ -11,7 +13,7 @@ public class DatabaseSchema {
             public static final String LOCATION = "location";
             public static final String PLAY_TIME = "play_time";
             public static final String DIFFICULTY = "difficulty_level";
-            public static final String SUBMIT_TIME = "submit_time";
+            public static final String DATE = "date";
             public static final String PLAYERS = "num_players";
             public static final String GENDER = "preferred_gender";
             public static final String ID = "drop_id";

@@ -11,7 +11,7 @@ public class Drop {
     String location;
     Date play_time;
     String difficulty;
-    Date submit_time;
+    Date date;
     int num_players;
     String gender;
     String message;
@@ -28,8 +28,8 @@ public class Drop {
     public String getDifficulty() { return difficulty; }
     public void setPlay_time(Date play_time) { this.play_time = play_time; }
     public String getPlay_time() { return play_time.toString(); }
-    public void setSubmit_time(Date play_time) { this.submit_time = submit_time; }
-    public String getSubmit_time() { return submit_time.toString();}
+    public void setDate(Date play_time) { this.date = date; }
+    public String getDate() { return date.toString();}
     public void setNum_players(int num_players) { this.num_players = num_players; }
     public int getNum_players() { return num_players; }
     public void setGender(String gender) { this.gender = gender; }
