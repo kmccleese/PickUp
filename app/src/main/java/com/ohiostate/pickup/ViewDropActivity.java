@@ -14,9 +14,9 @@ public class ViewDropActivity extends AppCompatActivity {
 
     public static final String EXTRA_DROP_ID = "com.ohiostate.pickup.drops";
 
-    public static Intent newIntent(Context packageContext, String drops) {
+    public static Intent newIntent(Context packageContext, int dropId) {
         Intent intent = new Intent(packageContext, ViewDropActivity.class);
-        intent.putExtra(EXTRA_DROP_ID, drops);
+        intent.putExtra(EXTRA_DROP_ID, dropId);
         return intent;
     }
 
@@ -34,7 +34,7 @@ public class ViewDropActivity extends AppCompatActivity {
     }
 
     protected Fragment createFragment() {
-        String dropID = (String) getIntent().getSerializableExtra(EXTRA_DROP_ID);
+        int dropID = (int) getIntent().getSerializableExtra(EXTRA_DROP_ID);
         return ViewDropActivityFragment.newInstance(dropID);
     }
 }

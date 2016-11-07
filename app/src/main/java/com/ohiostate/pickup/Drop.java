@@ -1,6 +1,7 @@
 package com.ohiostate.pickup;
 
 import java.util.Date;
+import java.util.Random;
 
 
 public class Drop {
@@ -16,6 +17,16 @@ public class Drop {
     String gender;
     String message;
 
+    public Drop() {
+        Random random = new Random();
+        id = random.nextInt();
+    }
+
+    public Drop(int given_id) {
+        id = given_id;
+        date = new Date();
+    }
+
     public void setId(int id) { this.id = id; }
     public int getId() { return id; }
     public void setPlayer_id(int player_id) { this.player_id = player_id; }
@@ -27,9 +38,9 @@ public class Drop {
     public void setDifficulty(String difficulty) { this.difficulty = difficulty; }
     public String getDifficulty() { return difficulty; }
     public void setPlay_time(Date play_time) { this.play_time = play_time; }
-    public String getPlay_time() { return play_time.toString(); }
-    public void setDate(Date play_time) { this.date = date; }
-    public String getDate() { return date.toString();}
+    public Date getPlay_time() { return play_time; }
+    public void setDate(Date date) { this.date = date; }
+    public Date getDate() { return date;}
     public void setNum_players(int num_players) { this.num_players = num_players; }
     public int getNum_players() { return num_players; }
     public void setGender(String gender) { this.gender = gender; }

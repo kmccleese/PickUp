@@ -61,15 +61,13 @@ public class NewDropActivityFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "NewDropActivity onCreate() called");
         setHasOptionsMenu(true);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_new_drop, container, false);
-        this.dh = new DropDatabaseHelper(this.getContext());
-        this.drop = new Drop();
         // instantiate
+        drop = new Drop();
         mDropButton = (Button) v.findViewById(R.id.drop_button);
         mShareButton = (Button) v.findViewById(R.id.share_button);
         mCancelButton = (Button) v.findViewById(R.id.cancel_button);
@@ -92,14 +90,14 @@ public class NewDropActivityFragment extends Fragment {
         sportSpinner.setAdapter(sportAdapater);
         sportSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-
+               mSport = parent.getItemAtPosition(pos).toString();
            }
            @Override
            public void onNothingSelected(AdapterView<?> arg0){
                //NOTHING
            }
         });
-        mSport = sportSpinner.getSelectedItem().toString();
+
 
         difficultySpinner = (Spinner) v.findViewById(R.id.difficulty_spinner);
         ArrayAdapter<CharSequence> diffAdapater = ArrayAdapter.createFromResource(this.getActivity(), R.array.difficulty_array,
@@ -108,14 +106,13 @@ public class NewDropActivityFragment extends Fragment {
         difficultySpinner.setAdapter(diffAdapater);
         difficultySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-
+                mDifficulty = parent.getItemAtPosition(pos).toString();
             }
             @Override
             public void onNothingSelected(AdapterView<?> arg0){
                 //NOTHING
             }
         });
-        mDifficulty = difficultySpinner.getSelectedItem().toString();
 
         genderSpinner = (Spinner) v.findViewById(R.id.gender_spinner);
         ArrayAdapter<CharSequence> adapater = ArrayAdapter.createFromResource(this.getActivity(), R.array.gender_array,
@@ -124,14 +121,13 @@ public class NewDropActivityFragment extends Fragment {
         genderSpinner.setAdapter(adapater);
         genderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-
+                mGender = parent.getItemAtPosition(pos).toString();
             }
             @Override
             public void onNothingSelected(AdapterView<?> arg0){
                 //NOTHING
             }
         });
-        mGender = genderSpinner.getSelectedItem().toString();
 
         // listeners
         mDropButton.setOnClickListener(new View.OnClickListener() {
@@ -164,7 +160,9 @@ public class NewDropActivityFragment extends Fragment {
                 }
 
                 //date and time set in updated onActivityResult
-                dh.insertDrop(drop);
+                DropFunctionality.get(getActivity()).addDrop(drop);
+
+                Toast.makeText(getContext(), "Drop created", Toast.LENGTH_SHORT);
             }
         });
         mShareButton.setOnClickListener(new View.OnClickListener() {
@@ -273,14 +271,14 @@ public class NewDropActivityFragment extends Fragment {
             Log.d(TAG, "inside if");
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mDate = date;
-         //   drop.setDate(date);
+            drop.setDate(date);
             updateDate();
         }
 
         if(requestCode == REQUEST_TIME) {
             Date date = (Date) data.getSerializableExtra(TimePickerFragment.EXTRA_DATE);
             mDate = date;
-        //    drop.setPlay_time(date);
+            drop.setPlay_time(date);
             updateTime();
         }
     }
