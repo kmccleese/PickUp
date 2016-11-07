@@ -14,7 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.List;
 
@@ -82,12 +85,14 @@ public class MainActivityFragment extends Fragment {
 
     private void updateUI() {
         // get a list of drops from the database
-        List<String> drops = Arrays.asList("one", "two", "three");
+        DropFunctionality dropFunctionality = DropFunctionality.get(getActivity());
+        List<Drop> drops = dropFunctionality.getDrops();
 
         if(mAdapter == null) {
             mAdapter = new DropAdapter(drops);
             mDropRecyclerView.setAdapter(mAdapter);
         } else {
+            mAdapter.setDrops(drops);
             mAdapter.notifyDataSetChanged();
         }
     }
@@ -98,7 +103,7 @@ public class MainActivityFragment extends Fragment {
         private TextView mMessageTextView;
         private TextView mSportTextView;
         private TextView mDateTextView;
-        private String mDrop;
+        private Drop mDrop;
 
         public DropHolder(View itemView) {
             super(itemView);
@@ -111,27 +116,31 @@ public class MainActivityFragment extends Fragment {
         }
 
         // get drop info from database
-        public void bindDrop(String drop) {
+        public void bindDrop(Drop drop) {
             mDrop = drop;
-            mNameTextView.setText(mDrop);
-            mMessageTextView.setText(mDrop + " message");
-            mSportTextView.setText(mDrop + " sport");
-            mDateTextView.setText(mDrop + " date");
+            mNameTextView.setText(Integer.toString(mDrop.getId()));
+            mMessageTextView.setText(mDrop.getMessage());
+            mSportTextView.setText(mDrop.getSport());
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("EEEE, MMMM d, yyyy");
+            String date = " " + dateFormatter.format(mDrop.getDate());
+            DateFormat dateFormat = DateFormat.getTimeInstance();
+            String time = " " + dateFormat.format(mDrop.getPlay_time());
+            mDateTextView.setText(date + time);
         }
 
         @Override
         public void onClick(View v) {
             // start ViewDropActivity
-            Intent intent = ViewDropActivity.newIntent(getActivity(), mDrop);
+            Intent intent = ViewDropActivity.newIntent(getActivity(), mDrop.getId());
             startActivity(intent);
         }
     }
 
     private class DropAdapter extends RecyclerView.Adapter<DropHolder> {
 
-        private List<String> mDrops;
+        private List<Drop> mDrops;
 
-        public DropAdapter(List<String> drops) {
+        public DropAdapter(List<Drop> drops) {
             mDrops = drops;
         }
 
@@ -144,13 +153,17 @@ public class MainActivityFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(DropHolder holder, int position) {
-            String drop = mDrops.get(position);
+            Drop drop = mDrops.get(position);
             holder.bindDrop(drop);
         }
 
         @Override
         public int getItemCount() {
             return mDrops.size();
+        }
+
+        public void setDrops(List<Drop> drops) {
+            mDrops = drops;
         }
     }
 }

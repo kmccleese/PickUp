@@ -10,7 +10,7 @@ import com.ohiostate.pickup.DatabaseSchema.DropTable;
 public class DropDatabaseHelper extends SQLiteOpenHelper{
 
     private static final int VERSION = 1;
-    private static final String DATABASE_NAME = "DropDB.db";
+    private static final String DATABASE_NAME = "dropDB.db";
 
     public DropDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
@@ -19,7 +19,7 @@ public class DropDatabaseHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + "DropTable" + "(" +
+        db.execSQL("create table " + DropTable.NAME + "(" +
                 " _id integer primary key autoincrement, " +
                 DropTable.Cols.PLAYER_ID + ", " +
                 DropTable.Cols.SPORT + ", " +
@@ -29,7 +29,8 @@ public class DropDatabaseHelper extends SQLiteOpenHelper{
                 DropTable.Cols.DATE + ", " +
                 DropTable.Cols.PLAYERS + ", " +
                 DropTable.Cols.GENDER + ", " +
-                DropTable.Cols.ID +
+                DropTable.Cols.ID + ", " +
+                DropTable.Cols.MESSAGE +
                 ")"
         );
 
@@ -40,7 +41,7 @@ public class DropDatabaseHelper extends SQLiteOpenHelper{
         db.execSQL("DROP TABLE IF EXISTS DropTable");
         onCreate(db);
     }
-
+/*
     public boolean insertDrop(Drop drop) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -52,7 +53,7 @@ public class DropDatabaseHelper extends SQLiteOpenHelper{
        // contentValues.put("date", drop.getDate());
         contentValues.put("num_players", drop.getNum_players());
         contentValues.put("preferred_gender", drop.getGender());
-        db.insert("DropTable", null, contentValues);
+        db.insert(DropTable.NAME, null, contentValues);
         return true;
     }
 
@@ -68,7 +69,7 @@ public class DropDatabaseHelper extends SQLiteOpenHelper{
         contentValues.put("num_players", drop.getNum_players());
         contentValues.put("preferred_gender", drop.getGender());
         Integer id = drop.getId();
-        db.update("DropTable", contentValues, "id = ? ", new String[]{Integer.toString(id)});
+        db.update(DropTable.NAME, contentValues, DropTable.Cols.ID + " = ? ", new String[]{Integer.toString(id)});
         return true;
     }
 
@@ -80,4 +81,5 @@ public class DropDatabaseHelper extends SQLiteOpenHelper{
                 new String[]{Integer.toString(id)});
 
     }
+    */
 }

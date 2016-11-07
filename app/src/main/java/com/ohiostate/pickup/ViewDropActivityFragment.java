@@ -14,24 +14,28 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ViewDropActivityFragment extends Fragment {
 
     private static final String ARG_DROP = "drop_id";
+    public static final String TAG = "ViewDropActivityFrag";
     private Button mPickUpButton;
     private Button mEditButton;
     private Button mDeleteButton;
     private ImageView mPhotoView;
     private TextView mNameTextView;
-    private String mDrop;
+    private Drop mDrop;
     private TextView mDateTextView;
     private TextView mTimeTextView;
 
-    public static ViewDropActivityFragment newInstance(String dropID) {
+    public static ViewDropActivityFragment newInstance(int dropID) {
         Bundle args = new Bundle();
-        args.putSerializable(ARG_DROP, dropID);
+        args.putInt(ARG_DROP, dropID);
 
         ViewDropActivityFragment fragment = new ViewDropActivityFragment();
         fragment.setArguments(args);
@@ -41,7 +45,14 @@ public class ViewDropActivityFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mDrop = (String) getArguments().getSerializable(ARG_DROP);
+        int dropId = getArguments().getInt(ARG_DROP);
+        Log.d(TAG, "onCreate dropId = " + dropId);
+        mDrop = DropFunctionality.get(getActivity()).getDrop(dropId);
+        if(mDrop != null) {
+            Toast.makeText(getContext(), "not null", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getContext(), "null", Toast.LENGTH_SHORT).show();
+        }
         setHasOptionsMenu(true);
     }
 
@@ -60,9 +71,12 @@ public class ViewDropActivityFragment extends Fragment {
         mTimeTextView = (TextView) v.findViewById(R.id.drop_time_text);
 
         // set TextViews
-        mNameTextView.setText(mDrop);
-        mDateTextView.setText("Month, Day, Year");
-        mTimeTextView.setText("Time");
+        //mNameTextView.setText(Integer.toString(mDrop.getId()));
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("EEEE, MMMM d, yyyy");
+        //String date = " " + dateFormatter.format(mDrop.getDate());
+        DateFormat dateFormat = DateFormat.getTimeInstance();
+        //String time = " " + dateFormat.format(mDrop.getPlay_time());
+        //mDateTextView.setText(date + time);
 
         // listeners
 
