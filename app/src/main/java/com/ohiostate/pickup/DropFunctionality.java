@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ public class DropFunctionality {
     private static DropFunctionality sDropFunctionality;
     private Context mContext;
     private SQLiteDatabase mDatabase;
+    public static final String TAG = "DropFunctionality";
 
     public static DropFunctionality get(Context context) {
         if(sDropFunctionality == null) {
@@ -56,9 +58,11 @@ public class DropFunctionality {
 
         try {
             if(cursor.getCount() == 0) {
+                Log.d(TAG, "getDrop return null");
                 return null;
             }
 
+            Log.d(TAG, "getDrop return correct?");
             cursor.moveToFirst();
             return cursor.getDrop();
         } finally {
@@ -74,6 +78,7 @@ public class DropFunctionality {
 
     private static ContentValues getContentValues(Drop drop) {
         ContentValues contentValues = new ContentValues();
+        contentValues.put("drop_id", drop.getId());
         contentValues.put("player_id", drop.getPlayer_id());
         contentValues.put("sport", drop.getSport());
         contentValues.put("location", drop.getLocation());

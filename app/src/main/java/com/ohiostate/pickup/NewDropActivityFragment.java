@@ -162,7 +162,7 @@ public class NewDropActivityFragment extends Fragment {
                 //date and time set in updated onActivityResult
                 DropFunctionality.get(getActivity()).addDrop(drop);
 
-                Toast.makeText(getContext(), "Drop created", Toast.LENGTH_SHORT);
+                Toast.makeText(getContext(), "Drop " + drop.getId() + " created", Toast.LENGTH_SHORT).show();
             }
         });
         mShareButton.setOnClickListener(new View.OnClickListener() {

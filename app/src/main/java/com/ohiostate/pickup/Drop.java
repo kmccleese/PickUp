@@ -19,7 +19,7 @@ public class Drop {
 
     public Drop() {
         Random random = new Random();
-        id = random.nextInt();
+        id = random.nextInt(500);
     }
 
     public Drop(int given_id) {

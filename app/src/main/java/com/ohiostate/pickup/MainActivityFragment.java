@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -117,7 +118,7 @@ public class MainActivityFragment extends Fragment {
         // get drop info from database
         public void bindDrop(Drop drop) {
             mDrop = drop;
-            mNameTextView.setText(Integer.toString(mDrop.getPlayer_id()));
+            mNameTextView.setText(Integer.toString(mDrop.getId()));
             mMessageTextView.setText(mDrop.getMessage());
             mSportTextView.setText(mDrop.getSport());
             SimpleDateFormat dateFormatter = new SimpleDateFormat("EEEE, MMMM d, yyyy");

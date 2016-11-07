@@ -7,12 +7,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import java.util.List;
 
 public class ViewDropActivity extends AppCompatActivity {
 
-    public static final String EXTRA_DROP_ID = "com.ohiostate.pickup.drops";
+    public static final String EXTRA_DROP_ID = "com.ohiostate.pickup.drop_id";
+    public static final String TAG = "ViewDropActivity";
 
     public static Intent newIntent(Context packageContext, int dropId) {
         Intent intent = new Intent(packageContext, ViewDropActivity.class);
