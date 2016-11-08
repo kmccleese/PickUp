@@ -23,6 +23,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -54,14 +56,10 @@ public class NewDropActivityFragment extends Fragment {
     private Integer mNumPlayers;
     private Spinner sportSpinner;
     private String mSport;
+    private Button logoutButton;
+    Intent intent;
 
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.d(TAG, "NewDropActivity onCreate() called");
-        setHasOptionsMenu(true);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -82,6 +80,7 @@ public class NewDropActivityFragment extends Fragment {
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         mDate = new GregorianCalendar(year, month, day).getTime();
+        logoutButton = (Button) v.findViewById(R.id.logout);
 
         sportSpinner = (Spinner) v.findViewById(R.id.sport_spinner);
         ArrayAdapter<CharSequence> sportAdapater = ArrayAdapter.createFromResource(this.getActivity(), R.array.sport_array,
@@ -89,13 +88,13 @@ public class NewDropActivityFragment extends Fragment {
         sportAdapater.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sportSpinner.setAdapter(sportAdapater);
         sportSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-           public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-               mSport = parent.getItemAtPosition(pos).toString();
-           }
-           @Override
-           public void onNothingSelected(AdapterView<?> arg0){
-               //NOTHING
-           }
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                mSport = parent.getItemAtPosition(pos).toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0){
+                //NOTHING
+            }
         });
 
 
@@ -149,8 +148,8 @@ public class NewDropActivityFragment extends Fragment {
                 }
 
 
-               drop.setMessage(mMessage);
-               // drop.setNum_players(mNumPlayers);
+                drop.setMessage(mMessage);
+                // drop.setNum_players(mNumPlayers);
                 if(genderSpinner.getSelectedItemId() != 0) {
                     drop.setGender(mGender);
                 }
@@ -186,6 +185,18 @@ public class NewDropActivityFragment extends Fragment {
                 dialog.show(manager, DIALOG_DATE);
             }
         });
+
+
+        logoutButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                LoginManager.getInstance().logOut();
+                intent = new Intent(getActivity(), LoginActivity.class);
+                NewDropActivityFragment.this.startActivity(intent);
+            }
+        });
+
+
         mTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
