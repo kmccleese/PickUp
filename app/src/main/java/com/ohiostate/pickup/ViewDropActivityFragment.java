@@ -16,9 +16,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class ViewDropActivityFragment extends Fragment {
 
@@ -32,6 +35,11 @@ public class ViewDropActivityFragment extends Fragment {
     private Drop mDrop;
     private TextView mDateTextView;
     private TextView mTimeTextView;
+    private TextView mMessageTextView;
+    private TextView mSportTextView;
+    private TextView mDifficultyTextView;
+    private TextView mNumPlayersTextView;
+    private TextView mGenderTextView;
 
     public static ViewDropActivityFragment newInstance(int dropID) {
         Bundle args = new Bundle();
@@ -47,11 +55,15 @@ public class ViewDropActivityFragment extends Fragment {
         super.onCreate(savedInstanceState);
         int dropId = getArguments().getInt(ARG_DROP);
         Log.d(TAG, "onCreate dropId = " + dropId);
-        mDrop = DropFunctionality.get(getActivity()).getDrop(dropId);
-        if(mDrop != null) {
-            Toast.makeText(getContext(), "not null", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(getContext(), "null", Toast.LENGTH_SHORT).show();
+        DropFunctionality dropFunctionality = DropFunctionality.get(getActivity());
+        List<Drop> drops = dropFunctionality.getDrops();
+        int count = 0;
+        for(count = 0; count < drops.size(); count++) {
+            int currentDropId = drops.get(count).getId();
+            if(currentDropId == dropId) {
+                mDrop = drops.get(count);
+                break;
+            }
         }
         setHasOptionsMenu(true);
     }
@@ -69,14 +81,24 @@ public class ViewDropActivityFragment extends Fragment {
         mNameTextView = (TextView) v.findViewById(R.id.drop_name_text);
         mDateTextView = (TextView) v.findViewById(R.id.drop_date_text);
         mTimeTextView = (TextView) v.findViewById(R.id.drop_time_text);
+        mMessageTextView = (TextView) v.findViewById(R.id.drop_message_text);
+        mSportTextView = (TextView) v.findViewById(R.id.drop_sport_text);
+        mDifficultyTextView = (TextView) v.findViewById(R.id.drop_difficulty_text);
+        mNumPlayersTextView = (TextView) v.findViewById(R.id.drop_num_players_text);
+        mGenderTextView = (TextView) v.findViewById(R.id.drop_gender_text);
 
         // set TextViews
-        //mNameTextView.setText(Integer.toString(mDrop.getId()));
+        mNameTextView.setText(Integer.toString(mDrop.getPlayer_id()));
         SimpleDateFormat dateFormatter = new SimpleDateFormat("EEEE, MMMM d, yyyy");
-        //String date = " " + dateFormatter.format(mDrop.getDate());
+        String date = " " + dateFormatter.format(mDrop.getDate());
         DateFormat dateFormat = DateFormat.getTimeInstance();
-        //String time = " " + dateFormat.format(mDrop.getPlay_time());
-        //mDateTextView.setText(date + time);
+        String time = " " + dateFormat.format(mDrop.getPlay_time());
+        mDateTextView.setText(date + time);
+        mSportTextView.setText(mDrop.getSport());
+        mMessageTextView.setText(mDrop.getMessage());
+        mDifficultyTextView.setText(mDrop.getDifficulty());
+        mNumPlayersTextView.setText(Integer.toString(mDrop.getNum_players()));
+        mGenderTextView.setText(mDrop.getGender());
 
         // listeners
 
@@ -125,6 +147,11 @@ public class ViewDropActivityFragment extends Fragment {
                 // go to edit profile
                 Intent intent2 = new Intent(getActivity(), EditProfile.class);
                 startActivity(intent2);
+                return true;
+            case R.id.menu_item_logout:
+                LoginManager.getInstance().logOut();
+                Intent intent3 = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent3);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

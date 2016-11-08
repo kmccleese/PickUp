@@ -54,11 +54,13 @@ public class DropFunctionality {
     }
 
     public Drop getDrop(int id) {
+
         DropCursorWrapper cursor = queryDrops(DropTable.Cols.ID + " = ?", new String[] { Integer.toString(id) });
 
         try {
             if(cursor.getCount() == 0) {
                 Log.d(TAG, "getDrop return null");
+                Log.d(TAG, "getCount = " + cursor.getCount());
                 return null;
             }
 
@@ -78,16 +80,16 @@ public class DropFunctionality {
 
     private static ContentValues getContentValues(Drop drop) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put("drop_id", drop.getId());
-        contentValues.put("player_id", drop.getPlayer_id());
-        contentValues.put("sport", drop.getSport());
-        contentValues.put("location", drop.getLocation());
-        contentValues.put("play_time", drop.getPlay_time().getTime());
-        contentValues.put("difficulty_level", drop.getDifficulty());
-        contentValues.put("date", drop.getDate().getTime());
-        contentValues.put("num_players", drop.getNum_players());
-        contentValues.put("preferred_gender", drop.getGender());
-        contentValues.put("message", drop.getMessage());
+        contentValues.put(DropTable.Cols.ID, drop.getId());
+        contentValues.put(DropTable.Cols.PLAYER_ID, drop.getPlayer_id());
+        contentValues.put(DropTable.Cols.SPORT, drop.getSport());
+        contentValues.put(DropTable.Cols.LOCATION, drop.getLocation());
+        contentValues.put(DropTable.Cols.PLAY_TIME, drop.getPlay_time().getTime());
+        contentValues.put(DropTable.Cols.DIFFICULTY, drop.getDifficulty());
+        contentValues.put(DropTable.Cols.DATE, drop.getDate().getTime());
+        contentValues.put(DropTable.Cols.PLAYERS, drop.getNum_players());
+        contentValues.put(DropTable.Cols.GENDER, drop.getGender());
+        contentValues.put(DropTable.Cols.MESSAGE, drop.getMessage());
 
         return contentValues;
     }

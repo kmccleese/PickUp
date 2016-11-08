@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.facebook.login.LoginManager;
+
 public class EditProfileFragment extends Fragment {
 
     @Override
@@ -49,6 +51,11 @@ public class EditProfileFragment extends Fragment {
                 // go to edit profile
                 Intent intent2 = new Intent(getActivity(), EditProfile.class);
                 startActivity(intent2);
+                return true;
+            case R.id.menu_item_logout:
+                LoginManager.getInstance().logOut();
+                Intent intent3 = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent3);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

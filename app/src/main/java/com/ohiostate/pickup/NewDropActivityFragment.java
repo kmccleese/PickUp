@@ -24,6 +24,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -57,9 +59,16 @@ public class NewDropActivityFragment extends Fragment {
     private Spinner sportSpinner;
     private String mSport;
     private Button logoutButton;
-    Intent intent;
+    private GoogleApiClient mClient;
+    private Button locationButton;
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 
+        mClient = new GoogleApiClient.Builder(getActivity()).addApi(LocationServices.API).build();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -80,7 +89,6 @@ public class NewDropActivityFragment extends Fragment {
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         mDate = new GregorianCalendar(year, month, day).getTime();
-        logoutButton = (Button) v.findViewById(R.id.logout);
 
         sportSpinner = (Spinner) v.findViewById(R.id.sport_spinner);
         ArrayAdapter<CharSequence> sportAdapater = ArrayAdapter.createFromResource(this.getActivity(), R.array.sport_array,
@@ -187,16 +195,6 @@ public class NewDropActivityFragment extends Fragment {
         });
 
 
-        logoutButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                LoginManager.getInstance().logOut();
-                intent = new Intent(getActivity(), LoginActivity.class);
-                NewDropActivityFragment.this.startActivity(intent);
-            }
-        });
-
-
         mTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -246,6 +244,20 @@ public class NewDropActivityFragment extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+
+        mClient.disconnect();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        mClient.disconnect();
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.fragment_drop_list, menu);
@@ -268,6 +280,11 @@ public class NewDropActivityFragment extends Fragment {
                 // go to edit profile
                 Intent intent2 = new Intent(getActivity(), EditProfile.class);
                 startActivity(intent2);
+                return true;
+            case R.id.menu_item_logout:
+                LoginManager.getInstance().logOut();
+                Intent intent3 = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent3);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

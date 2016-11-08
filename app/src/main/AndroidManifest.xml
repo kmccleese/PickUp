@@ -3,6 +3,11 @@
           package="com.ohiostate.pickup">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNALsTORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -21,7 +26,12 @@
             </intent-filter>
         </activity>
               
-        <activity android:name=".ViewDropActivity">
+        <activity android:name=".ViewDropActivity"
+            android:parentActivityName=".MainActivity">
+        </activity>
+
+        <activity android:name=".MainActivity">
+
         </activity>
               
         <activity
@@ -36,7 +46,7 @@
               
         <activity
             android:name=".EditProfile"
-            android:parentActivityName=".ViewDropActivity">
+            android:parentActivityName=".ViewProfile">
         </activity>
         <activity
             android:name=".LoginActivity"

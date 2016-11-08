@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -77,6 +79,11 @@ public class MainActivityFragment extends Fragment {
                 // go to edit profile
                 Intent intent2 = new Intent(getActivity(), EditProfile.class);
                 startActivity(intent2);
+                return true;
+            case R.id.menu_item_logout:
+                LoginManager.getInstance().logOut();
+                Intent intent3 = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent3);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
