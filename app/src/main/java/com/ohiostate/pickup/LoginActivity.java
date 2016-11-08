@@ -2,14 +2,14 @@ package com.ohiostate.pickup;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
-//import android.support.v7.util.ThreadUtil;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -18,25 +18,16 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Arrays;
-
-//import pickup.R;
+import com.ohiostate.pickup.R;
 
 public class LoginActivity extends Activity {
-
-    private PlayerDatabaseHelper dh;
     private TextView info;
     private LoginButton loginButton;
+    Intent intent;
 
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
@@ -55,53 +46,47 @@ public class LoginActivity extends Activity {
 //        });
 //    }
 
+
     CallbackManager callbackManager;
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.d("Test","TestLog1234");
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
 
-        this.dh = new PlayerDatabaseHelper(this);
+
+
+        if (isLoggedIn()) {
+            Log.d("","Logged In. Access token: " + AccessToken.getCurrentAccessToken());
+            intent = new Intent(LoginActivity.this, MainActivity.class);
+            LoginActivity.this.startActivity(intent);
+            finish();
+        }
+
+
+        callbackManager = CallbackManager.Factory.create();
 
         setContentView(R.layout.activity_login);
         info = (TextView)findViewById(R.id.info);
         loginButton = (LoginButton)findViewById(R.id.login_button);
-        loginButton.setReadPermissions(Arrays.asList("public_profile", "email", "location"));
-
-        callbackManager = CallbackManager.Factory.create();
 
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                AccessToken accessToken = loginResult.getAccessToken();
                 info.setText(
                         "Success: User ID: "
                                 + loginResult.getAccessToken().getUserId()
                                 + "\n" + "Auth Token: "
                                 + loginResult.getAccessToken().getToken()
                 );
-                GraphRequest request = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
-                    @Override
-                    public void onCompleted(JSONObject object, GraphResponse response) {
-                        try {
-                           String email = object.getString("email");
-                            String first_name = object.getString("first_name");
-                            String last_name = object.getString("last_name");
-                            String gender = object.getString("gender");
+                System.out.println(
+                        "Success: User ID: "
+                                + loginResult.getAccessToken().getUserId()
+                                + "\n" + "Auth Token: "
+                                + loginResult.getAccessToken().getToken()
+                );
 
 
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-
-                    }
-                });
-                Bundle parameters = new Bundle();
-                parameters.putString("fields", "first_name, gender, location, email");
-                request.setParameters(parameters);
-                request.executeAsync();
             }
 
             @Override
@@ -121,22 +106,32 @@ public class LoginActivity extends Activity {
 //        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {  });
 
 
-  /*      super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
 
-        callbackManager = CallbackManager.Factory.create();*/
-
+        callbackManager = CallbackManager.Factory.create();
+//        loginButton.setVisibility(View.INVISIBLE);
+//        Intent intent = new Intent(LoginActivity.this, NewDropActivity.class);
+//        startActivity(intent);
+//        finish();
 
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == Activity.RESULT_OK){
-            startActivity(new Intent(this, MainActivity.class));
+        Log.d(" ","resultCode:" + resultCode);
+        if (resultCode == RESULT_OK) {
+            loginButton.setVisibility(View.INVISIBLE);
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 
+    public boolean isLoggedIn() {
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        return accessToken != null;
+    }
 
 }
