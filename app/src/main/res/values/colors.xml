@@ -6,6 +6,8 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="background">#3D577C</color>
-    <color name="green">#AEBC64</color>
-    <color name="redish">#902933</color>
+    <color name="green">#BCCC6A</color>
+    <color name="dark_green">#9CA85B</color>
+    <color name="maroon">#AD1120</color>
+    <color name="gray">#A2A2A2</color>
 </resources>
