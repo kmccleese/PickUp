@@ -1,8 +1,13 @@
 package com.ohiostate.pickup;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -27,11 +32,14 @@ import com.facebook.login.LoginManager;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Locale;
 
 public class NewDropActivityFragment extends Fragment {
     private DropDatabaseHelper dh;
@@ -45,6 +53,8 @@ public class NewDropActivityFragment extends Fragment {
     private Button mCancelButton;
     private Button mDateButton;
     private EditText mMessageEditText;
+    private Button mLocation;
+    private TextView mLocationField;
     private TextView mDateTextView;
     private TextView mTimeTextView;
     private Button mTimeButton;
@@ -73,6 +83,7 @@ public class NewDropActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_new_drop, container, false);
+
         // instantiate
         drop = new Drop();
         mDropButton = (Button) v.findViewById(R.id.drop_button);
@@ -84,6 +95,8 @@ public class NewDropActivityFragment extends Fragment {
         mDateTextView = (TextView) v.findViewById(R.id.new_drop_date_text);
         mTimeButton = (Button) v.findViewById(R.id.new_drop_time_button);
         mTimeTextView = (TextView) v.findViewById(R.id.new_drop_time_text);
+        mLocation = (Button) v.findViewById(R.id.location_button);
+        mLocationField = (TextView) v.findViewById(R.id.location);
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
@@ -165,7 +178,7 @@ public class NewDropActivityFragment extends Fragment {
                     Toast.makeText(getContext(), "Please select a gender", Toast.LENGTH_SHORT).show();
 
                 }
-
+                drop.setLocation(mLocationField.toString());
                 //date and time set in updated onActivityResult
                 DropFunctionality.get(getActivity()).addDrop(drop);
 
@@ -240,6 +253,40 @@ public class NewDropActivityFragment extends Fragment {
 
             }
         });
+
+        mLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GPSTracker gps = new GPSTracker(getActivity());
+                MapsActivity map = new MapsActivity();
+
+                // check if GPS enabled
+                ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                if(gps.canGetLocation()){
+
+                    double latitude = gps.getLatitude();
+                    double longitude = gps.getLongitude();
+                    Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
+                    try {
+                        List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+                        mLocationField.setText(addresses.get(0).getAddressLine(0) + ", " + addresses.get(0).getAddressLine(1));
+                        Log.d("Your Location is: ", geocoder.getFromLocation(latitude, longitude, 1).toString());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    // \n is for new line
+
+                }else {
+                    // can't get location
+                    // GPS or Network is not enabled
+                    // Ask user to enable GPS/network in settings
+                    gps.showSettingsAlert();
+                }
+            }
+        });
+
+
         return v;
     }
 
@@ -323,4 +370,32 @@ public class NewDropActivityFragment extends Fragment {
         String time = " " + dateFormat.format(mDate);
         mTimeTextView.setText(time);
     }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                    Toast.makeText(getActivity(), "Permission denied to read your External storage", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
+    }
+
 }

@@ -22,7 +22,7 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="drop">Drop</string>
     <string name="share">Share</string>
-    <string name ="save">Save</string>
+    <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="title_activity_view_profile">ViewProfile</string>
     <string name="view_profile">Profile</string>
@@ -39,6 +39,8 @@
     <string name="logout">Logout</string>
     <string name="facebook_app_id">387735828281933</string>
     <string name="fb_login_protocol_scheme">fb1698807303768761</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_launcher">LauncherActivity</string>
     <string-array name="sport_array">
         <item>Select Sport</item>
         <item>Badminton</item>
@@ -81,7 +83,7 @@
         <item>Females Only</item>
         <item>Any gender welcome</item>
     </string-array>
-
+    <string name="title_activity_maps">Map</string>
 
 
 </resources>
