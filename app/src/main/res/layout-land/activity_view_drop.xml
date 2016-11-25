@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:id="@+id/fragment_container"
+             tools:background="@color/background"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+<ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:padding="15dp"
+            android:orientation="vertical"
+            android:id="@+id/drop_info"
+            android:radius="5dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="15dp"
+                android:id="@+id/photo_and_name">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:scaleType="centerInside"
+                    android:background="@android:color/darker_gray"
+                    android:cropToPadding="true"
+                    android:id="@+id/photo"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/drop_name_text"
+                    android:layout_marginLeft="15dp"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:text="@string/drop_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/drop_message_text"/>
+
+
+                <TextView
+                    android:text="@string/drop_sport"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/drop_sport_text"/>
+
+
+                <TextView
+                    android:text="@string/drop_difficulty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/drop_difficulty_text"/>
+
+
+                <TextView
+                    android:text="@string/drop_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/drop_date_title_text"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/drop_date_text"
+                    android:layout_marginLeft="2dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/drop_time_text"
+                    android:layout_marginLeft="2dp"/>
+
+
+            </LinearLayout>
+
+                <TextView
+                    android:text="@string/drop_num_players"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/drop_num_players_text"/>
+
+                <TextView
+                    android:text="@string/drop_preferred_gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/drop_gender_text"/>
+
+            <TextView
+                android:text="@string/drop_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/drop_location_text"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_name"
+                    style="@style/Buttons"
+                    android:layout_margin="5dp"
+                    android:id="@+id/pickup_button"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/edit"
+                    style="@style/Buttons"
+                    android:layout_margin="5dp"
+                    android:id="@+id/edit_button"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/delete"
+                    style="@style/Buttons"
+                    android:layout_margin="5dp"
+                    android:id="@+id/delete_button"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+</ScrollView>
+</FrameLayout>

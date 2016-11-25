@@ -2,6 +2,7 @@ package com.ohiostate.pickup;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.location.Address;
 import android.location.Geocoder;
 import android.support.v4.app.ActivityCompat;
@@ -79,6 +80,7 @@ public class NewDropActivityFragment extends Fragment {
 
         mClient = new GoogleApiClient.Builder(getActivity()).addApi(LocationServices.API).build();
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -245,7 +247,13 @@ public class NewDropActivityFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mNumPlayers = Integer.parseInt(s.toString());
+
+                try {
+                    mNumPlayers = Integer.parseInt(s.toString());
+                }
+                catch (NumberFormatException e) {
+
+                }
             }
 
             @Override

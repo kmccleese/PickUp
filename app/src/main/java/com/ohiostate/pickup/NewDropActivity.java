@@ -2,6 +2,7 @@ package com.ohiostate.pickup;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.res.Configuration;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -25,7 +26,7 @@ public class NewDropActivity extends AppCompatActivity {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_container);
-        if(fragment == null) {
+        if (fragment == null) {
             fragment = new NewDropActivityFragment();
             fragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit();
         }
@@ -37,7 +38,7 @@ public class NewDropActivity extends AppCompatActivity {
 
         int errorCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
 
-        if(errorCode != ConnectionResult.SUCCESS) {
+        if (errorCode != ConnectionResult.SUCCESS) {
             Dialog errorDialog = GooglePlayServicesUtil.getErrorDialog(errorCode, this, REQUEST_ERROR, new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialogInterface) {
@@ -47,5 +48,12 @@ public class NewDropActivity extends AppCompatActivity {
             });
             errorDialog.show();
         }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        setContentView(R.layout.activity_new_drop);
+
     }
 }
