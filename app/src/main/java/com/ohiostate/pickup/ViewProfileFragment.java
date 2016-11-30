@@ -3,20 +3,50 @@ package com.ohiostate.pickup;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 
+import org.w3c.dom.Text;
+
 public class ViewProfileFragment extends Fragment {
+
+    private static final String ARG_Profile = "player_id";
+    public static final String TAG = "ViewProfileFrag";
+
+    private TextView mFirstName;
+    private TextView mLastName;
+    private TextView mEmail;
+    private TextView mGender;
+    private Player mPlayer;
+    private Button mEditProfileButton;
+
+    public static ViewProfileFragment newInstance(int playerID){
+        Bundle args = new Bundle();
+        args.putInt(ARG_Profile, playerID);
+
+        ViewProfileFragment fragment = new ViewProfileFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+
         setHasOptionsMenu(true);
     }
 
@@ -24,6 +54,39 @@ public class ViewProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.activity_view_profile, container, false);
+
+        mFirstName = (TextView) v.findViewById(R.id.player_name);
+        mEmail = (TextView) v.findViewById(R.id.player_email);
+        mGender = (TextView) v.findViewById(R.id.player_gender);
+
+        ProfileFunctionality profileFunctionality = ProfileFunctionality.get(getActivity());
+        mPlayer = profileFunctionality.getPlayer(Long.parseLong(Profile.getCurrentProfile().getId()));
+        if (mPlayer == null) {
+            mPlayer = new Player(Long.parseLong(Profile.getCurrentProfile().getId()));
+            mFirstName.setText("Name");
+            mEmail.setText("Email");
+            mGender.setText("Gender");
+        }
+
+        else {
+            if (mPlayer.first_name != null) {
+                mFirstName.setText(mPlayer.first_name);
+            } else {
+                mFirstName.setText("Name");
+            }
+            if (mPlayer.email != null) {
+                mEmail.setText(mPlayer.email);
+            } else {
+                mPlayer.setEmail("Email");
+            }
+            if(mPlayer.gender != null) {
+                mGender.setText(mPlayer.gender);
+            }
+            else{
+                mGender.setText("Gender");
+            }
+
+        }
 
         return v;
     }
