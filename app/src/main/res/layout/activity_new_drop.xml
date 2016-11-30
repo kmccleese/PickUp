@@ -6,15 +6,17 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:padding="15dp"
+        android:layout_margin="15dp"
         android:orientation="vertical"
         android:id="@+id/drop_info"
-        tools:background="@drawable/backdrop"
-        android:radius="5dp">
+        style="@style/WhiteBackdrop">
 
         <TextView
             android:text="@string/new_drop"
@@ -22,9 +24,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/new_drop_title_text"
             android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:layout_marginBottom="10dp"/>
+            style="@style/Texts.Title"/>
       
 <!--
         <TextView
@@ -37,8 +37,8 @@
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:id="@+id/sport_spinner"/>
+            android:id="@+id/sport_spinner"
+            style="@style/Texts.Spinner"/>
 <!--
         <TextView
             android:layout_width="match_parent"
@@ -50,8 +50,8 @@
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:id="@+id/difficulty_spinner"/>
+            android:id="@+id/difficulty_spinner"
+            style="@style/Texts.Spinner"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -63,25 +63,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                style="@style/Texts"
                 android:id="@+id/new_drop_date_title_text"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/new_drop_date_button"
-                style="@style/Buttons"
                 android:layout_margin="5dp"
                 android:text="@string/date_button_text"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/Buttons"
                 android:layout_margin="5dp"
                 android:id="@+id/new_drop_time_button"
                 android:text="@string/time_button_text"/>
+
         </LinearLayout>
 
     <LinearLayout
@@ -92,12 +90,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/new_drop_date_text"/>
+                android:id="@+id/new_drop_date_text"
+                style="@style/Texts"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/new_drop_time_text"/>
+                android:id="@+id/new_drop_time_text"
+                style="@style/Texts"/>
 
 
         </LinearLayout>
@@ -113,7 +113,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_margin="10dp"
+            style="@style/Texts"
             android:textSize="16dp"
             android:id="@+id/new_drop_num_players_text"/>
         <EditText
@@ -121,6 +121,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/num_players_text"
             android:layout_marginLeft="8dp"
+            style="@style/Texts.EditText"
             android:layout_weight="1"/>
 
         </LinearLayout>
@@ -134,14 +135,14 @@
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            style="@style/Texts.Spinner"
             android:id="@+id/gender_spinner"/>
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            style="@style/Texts"
             android:textSize="16dp"
             android:text="@string/drop_location"
             android:id="@+id/new_drop_location_text"/>
@@ -149,6 +150,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14dp"
+                style="@style/Texts"
                 android:id="@+id/location"/>
 
         <Button
@@ -162,7 +164,7 @@
             android:text="@string/drop_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            style="@style/Texts"
             android:id="@+id/new_drop_message"/>
 
         <EditText
@@ -172,6 +174,8 @@
             android:minLines="1"
             android:maxLines="3"
             android:scrollbars="vertical"
+            style="@style/Texts.EditText"
+            android:hint="@string/message_hint"
             android:id="@+id/message_edit_text"
             android:textSize="14sp"/>
         <LinearLayout
@@ -187,7 +191,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/drop"
                 android:id="@+id/drop_button"
-                style="@style/Buttons"
                 android:layout_margin="5dp"
                 android:layout_gravity="center_horizontal|center"/>
 
@@ -196,7 +199,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/share"
                 android:id="@+id/share_button"
-                style="@style/Buttons"
                 android:layout_margin="5dp"
                 android:layout_gravity="center_horizontal|center"/>
 
@@ -205,12 +207,13 @@
                 android:layout_height="wrap_content"
                 android:text="@string/cancel"
                 android:id="@+id/cancel_button"
-                style="@style/Buttons"
                 android:layout_margin="5dp"
                 android:layout_gravity="center_horizontal|center"/>
 
         </LinearLayout>
 
     </LinearLayout>
+
+    </ScrollView>
 
 </FrameLayout>

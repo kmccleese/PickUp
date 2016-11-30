@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
 
@@ -13,10 +13,35 @@
 
     <style name="Buttons" parent="android:style/Widget.Holo.Button">
         <item name="android:background">@drawable/button</item>
+        <item name="android:textColor">@color/maroon</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="LinearLayout">
+    <style name="WhiteBackdrop">
         <item name="android:background">@drawable/backdrop</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+    </style>
+
+    <style name="Texts" parent="android:style/Widget.Holo.TextView">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Texts.Title">
+        <item name="android:textAlignment" tools:targetApi="jelly_bean_mr1">center</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
+    <style name="Texts.Spinner">
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:background">@color/gray</item>
+        <item name="android:popupBackground">@color/gray</item>
+    </style>
+
+    <style name="Texts.EditText">
+        <item name="android:background">@color/gray</item>
+        <item name="android:padding">5dp</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
