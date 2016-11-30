@@ -5,9 +5,7 @@
              tools:background="@color/background"
              android:layout_width="match_parent"
              android:layout_height="match_parent">
-<ScrollView
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,8 +41,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="player's name(pull from database)"
-                android:textSize="12dp" />
+                android:text=""
+                android:textSize="12dp"
+                android:id="@+id/player_name"/>
+
 
         </LinearLayout>
         <LinearLayout
@@ -62,8 +62,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="player's email (pull from database)"
-                android:textSize="12dp" />
+                android:text=""
+                android:id="@+id/player_email"/>
+
+            android:textSize="12dp" />
         </LinearLayout>
         <TextView
             android:text="@string/preferences"
@@ -116,7 +118,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/gender_spinner"/>
+            android:id="@+id/player_gender"/>
 
         <TextView
             android:text="@string/profile_radius"
@@ -134,19 +136,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="horizontal"
-            android:padding="5dp">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/back"
-                android:id="@+id/back_button"
-                android:layout_gravity="left"/>
-
+            android:padding="5dp"
+            android:layout_margin="5dp"
+            android:weightSum="1">
 
 
         </LinearLayout>
 
     </LinearLayout>
-</ScrollView>
+
 </FrameLayout>
