@@ -21,6 +21,7 @@ public class PlayerDatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " + PlayerTable.NAME + "(" +
                 " _id integer primary key autoincrement, " +
+                PlayerTable.Cols.ID + ", " +
                 PlayerTable.Cols.FIRST_NAME + ", " +
                 PlayerTable.Cols.LAST_NAME + ", " +
                 PlayerTable.Cols.EMAIL + ", " +
@@ -37,25 +38,27 @@ public class PlayerDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public boolean insertPlayer(String first_name, String last_name, String email, String gender) {
+    public boolean insertPlayer(Player player) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("first_name", first_name);
-        contentValues.put("last_name", last_name);
-        contentValues.put("email", email);
-        contentValues.put("gender", gender);
+        contentValues.put("player_id",player.getId());
+        contentValues.put("first_name", player.getFirst_Name());
+        contentValues.put("last_name", player.getLast_name());
+        contentValues.put("email", player.getEmail());
+        contentValues.put("gender", player.getGender());
         db.insert("PlayerTable", null, contentValues);
         return true;
     }
 
-    public boolean updatePlayer(Integer id, String first_name, String last_name, String email, String gender) {
+    public boolean updatePlayer(Player player) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("first_name", first_name);
-        contentValues.put("last_name", last_name);
-        contentValues.put("email", email);
-        contentValues.put("gender", gender);
-        db.update("PlayerTable", contentValues, "id = ? ", new String[]{Integer.toString(id)});
+        contentValues.put("player_id",player.getId());
+        contentValues.put("first_name", player.getFirst_Name());
+        contentValues.put("last_name", player.getLast_name());
+        contentValues.put("email", player.getEmail());
+        contentValues.put("gender", player.gender);
+        db.update(PlayerTable.NAME, contentValues, PlayerTable.Cols.ID + " = ? ", new String[]{Long.toString(player.player_id)});
         return true;
     }
 
