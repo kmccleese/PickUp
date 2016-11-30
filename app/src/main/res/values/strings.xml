@@ -38,7 +38,6 @@
     <string name="logout">Logout</string>
     <string name="facebook_app_id">387735828281933</string>
     <string name="fb_login_protocol_scheme">fb1698807303768761</string>
-    <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_launcher">LauncherActivity</string>
     <string-array name="sport_array">
         <item>Select Sport</item>

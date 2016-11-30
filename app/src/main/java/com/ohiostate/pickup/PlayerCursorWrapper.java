@@ -18,7 +18,7 @@ public class PlayerCursorWrapper extends CursorWrapper {
 
     public Player getPlayer(){
 
-        long playerID = getLong(getColumnIndex(PlayerTable.Cols.ID));
+        int playerID = getInt(getColumnIndex(PlayerTable.Cols.ID));
         String playerFirstName = getString(getColumnIndex(PlayerTable.Cols.FIRST_NAME));
         String playerLastName = getString(getColumnIndex(PlayerTable.Cols.LAST_NAME));
         String playerEmail = getString(getColumnIndex(PlayerTable.Cols.EMAIL));

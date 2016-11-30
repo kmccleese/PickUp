@@ -1,5 +1,6 @@
 package com.ohiostate.pickup;
 
+import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -23,5 +24,12 @@ public class MainActivity extends AppCompatActivity {
             fragment = new MainActivityFragment();
             fragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit();
         }
+    }
+
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
     }
 }
