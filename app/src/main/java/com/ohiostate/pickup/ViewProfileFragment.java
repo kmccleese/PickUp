@@ -64,8 +64,8 @@ public class ViewProfileFragment extends Fragment {
         if (mPlayer == null) {
             mPlayer = new Player(Long.parseLong(Profile.getCurrentProfile().getId()));
             mFirstName.setText("Name");
-            mEmail.setText("Email");
-            mGender.setText("Gender");
+//            mEmail.setText("Email");
+//            mGender.setText("Gender");
         }
 
         else {
