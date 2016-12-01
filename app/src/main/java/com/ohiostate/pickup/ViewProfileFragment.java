@@ -18,6 +18,8 @@ import com.facebook.login.LoginManager;
 
 import org.w3c.dom.Text;
 
+import java.util.List;
+
 public class ViewProfileFragment extends Fragment {
 
     private static final String ARG_Profile = "player_id";
@@ -44,10 +46,26 @@ public class ViewProfileFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        long playerID = Long.parseLong(Profile.getCurrentProfile().getId());
+
+        Log.d(TAG,"ID: " + playerID);
+
+        ProfileFunctionality profileFunctionality = ProfileFunctionality.get(getActivity());
+        mPlayer = profileFunctionality.getPlayer(playerID);
 
 
-
-        setHasOptionsMenu(true);
+//
+//        List<Player> players = profileFunctionality.getPlayers();
+//        int count = 0;
+//
+//        for (count = 0; count<players.size(); count++){
+//            long currentPlayerID = players.get(count).getId();
+//            if(currentPlayerID == playerID){
+//                mPlayer = players.get(count);
+//                break;
+//            }
+//        }
+      setHasOptionsMenu(true);
     }
 
     @Override
@@ -59,8 +77,7 @@ public class ViewProfileFragment extends Fragment {
         mEmail = (TextView) v.findViewById(R.id.player_email);
         mGender = (TextView) v.findViewById(R.id.player_gender);
 
-        ProfileFunctionality profileFunctionality = ProfileFunctionality.get(getActivity());
-        mPlayer = profileFunctionality.getPlayer(Long.parseLong(Profile.getCurrentProfile().getId()));
+
         if (mPlayer == null) {
             mPlayer = new Player(Long.parseLong(Profile.getCurrentProfile().getId()));
             mFirstName.setText("Name");

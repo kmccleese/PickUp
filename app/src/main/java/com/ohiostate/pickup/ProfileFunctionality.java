@@ -8,6 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.ohiostate.pickup.DatabaseSchema.PlayerTable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by blakehoward on 11/25/16.
  */
@@ -19,25 +22,25 @@ public class ProfileFunctionality {
     private SQLiteDatabase mDatabase;
     public static final String TAG = "ProfileFunctionaltiy";
 
-    public static ProfileFunctionality get(Context context){
-        if(sProfileFunctionality == null){
+    public static ProfileFunctionality get(Context context) {
+        if (sProfileFunctionality == null) {
             sProfileFunctionality = new ProfileFunctionality(context);
         }
         return sProfileFunctionality;
     }
 
-    private ProfileFunctionality(Context context){
+    private ProfileFunctionality(Context context) {
         mContext = context.getApplicationContext();
         mDatabase = new PlayerDatabaseHelper(mContext).getWritableDatabase();
     }
 
-    public void addPlayer(Player player){
+    public void addPlayer(Player player) {
         ContentValues values = getContentValues(player);
         mDatabase.insert(PlayerTable.NAME, null, values);
     }
 
-    public Player getPlayer(long player_id){
-        PlayerCursorWrapper cursor = queryPlayers(PlayerTable.Cols.ID + " = ?", new String[] {Long.toString(player_id)});
+    public Player getPlayer(long player_id) {
+        PlayerCursorWrapper cursor = queryPlayers(PlayerTable.Cols.PLAYER_ID + " = ?", new String[]{Long.toString(player_id)});
         try {
             if (cursor.getCount() == 0) {
                 return null;
@@ -50,15 +53,38 @@ public class ProfileFunctionality {
 
     }
 
+
+
+    public List<Player> getPlayers(){
+        List<Player> players = new ArrayList<>();
+        PlayerCursorWrapper cursor = queryPlayers(null,null);
+        try {
+            if (cursor.getCount() > 0) {
+                while (!cursor.isAfterLast()) {
+                    players.add(cursor.getPlayer());
+                }
+            }
+            else{
+                return players;
+            }
+        }
+            finally {
+                cursor.close();
+            }
+        return players;
+        }
+
+
+
     public void updateProfle(Player player){
         long player_id = player.getId();
         ContentValues values = getContentValues(player);
-        mDatabase.update(PlayerTable.NAME, values, PlayerTable.Cols.ID + " = ?", new String[] {Long.toString(player_id)});
+        mDatabase.update(PlayerTable.NAME, values, PlayerTable.Cols.PLAYER_ID + " = ?", new String[] {Long.toString(player_id)});
     }
 
     private static ContentValues getContentValues(Player player){
         ContentValues contentValues = new ContentValues();
-        contentValues.put(PlayerTable.Cols.ID, player.getId());
+        contentValues.put(PlayerTable.Cols.PLAYER_ID, player.getId());
         contentValues.put(PlayerTable.Cols.FIRST_NAME,player.getFirst_Name());
         contentValues.put(PlayerTable.Cols.LAST_NAME,player.getLast_name());
         contentValues.put(PlayerTable.Cols.EMAIL, player.getEmail());

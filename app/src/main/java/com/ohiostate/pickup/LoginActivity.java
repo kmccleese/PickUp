@@ -1,6 +1,7 @@
 package com.ohiostate.pickup;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.nfc.Tag;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.Profile;
+import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -28,7 +31,8 @@ public class LoginActivity extends Activity {
     private TextView info;
     private LoginButton loginButton;
     Intent intent;
-
+    Context context;
+    ProfileFunctionality profileFunctionality;
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
@@ -46,17 +50,43 @@ public class LoginActivity extends Activity {
 //        });
 //    }
 
+    ProfileTracker mProfileTracker;
+
 
     CallbackManager callbackManager;
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.d("Test","TestLog1234");
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
+
+        mProfileTracker = new ProfileTracker() {
+            @Override
+            protected void onCurrentProfileChanged(Profile profile, Profile profile2) {
+                updateUI(); //this is the third piece of code I will discuss below
+            }
+        };
+
+        mProfileTracker.startTracking();
+
+
+
 
 
 
         if (isLoggedIn()) {
+            context = this.getApplicationContext();
+            PlayerDatabaseHelper playerDBHelper = new PlayerDatabaseHelper(context);
+            profileFunctionality = ProfileFunctionality.get(this);
+            long playerID = Long.parseLong(Profile.getCurrentProfile().getId());
+
+            if(!playerDBHelper.isExist(playerID)){
+                Player player = new Player(playerID);
+                player.setFirst_name("InitialName");
+                player.setEmail("InitialEmail");
+                profileFunctionality.get(this).addPlayer(player);
+         }
+
+
             Log.d("","Logged In. Access token: " + AccessToken.getCurrentAccessToken());
             intent = new Intent(LoginActivity.this, MainActivity.class);
             LoginActivity.this.startActivity(intent);
@@ -132,6 +162,20 @@ public class LoginActivity extends Activity {
     public boolean isLoggedIn() {
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         return accessToken != null;
+    }
+
+    private void updateUI(){
+
+        boolean enableButtons = AccessToken.getCurrentAccessToken() != null;
+
+        Profile profile = Profile.getCurrentProfile();
+        if (profile == null) {
+            Log.e("Profile", "null");
+        }
+        if (enableButtons && profile != null) {
+            Log.e("Access Token",AccessToken.getCurrentAccessToken().toString());
+            Log.e("TabSocial", profile.getName());
+        }
     }
 
 }
