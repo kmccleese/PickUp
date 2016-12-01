@@ -194,15 +194,6 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/share"
-                android:id="@+id/share_button"
-                style="@style/Buttons"
-                android:layout_margin="5dp"
-                android:layout_gravity="center_horizontal|center"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="@string/cancel"
                 android:id="@+id/cancel_button"
                 style="@style/Buttons"

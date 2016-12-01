@@ -49,6 +49,9 @@ public class EditProfileFragment extends Fragment {
         if (mPlayer == null){
             mPlayer = new Player(Long.parseLong(Profile.getCurrentProfile().getId()));
         }
+        if (mPlayer == null){
+            mPlayer = new Player(7);
+        }
         setHasOptionsMenu(true);
 
         mClient = new GoogleApiClient.Builder(getActivity()).addApi(LocationServices.API).build();
