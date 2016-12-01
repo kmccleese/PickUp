@@ -3,6 +3,7 @@ package com.ohiostate.pickup;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -21,7 +22,7 @@ public class PlayerDatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " + PlayerTable.NAME + "(" +
                 " _id integer primary key autoincrement, " +
-                PlayerTable.Cols.ID + ", " +
+                PlayerTable.Cols.PLAYER_ID + ", " +
                 PlayerTable.Cols.FIRST_NAME + ", " +
                 PlayerTable.Cols.LAST_NAME + ", " +
                 PlayerTable.Cols.EMAIL + ", " +
@@ -58,7 +59,7 @@ public class PlayerDatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("last_name", player.getLast_name());
         contentValues.put("email", player.getEmail());
         contentValues.put("gender", player.gender);
-        db.update(PlayerTable.NAME, contentValues, PlayerTable.Cols.ID + " = ? ", new String[]{Long.toString(player.player_id)});
+        db.update(PlayerTable.NAME, contentValues, PlayerTable.Cols.PLAYER_ID + " = ? ", new String[]{Long.toString(player.player_id)});
         return true;
     }
 
@@ -67,6 +68,17 @@ public class PlayerDatabaseHelper extends SQLiteOpenHelper {
         return db.delete("PlayerTable",
                 "id = ? ",
                 new String[]{Integer.toString(id)});
+
+    }
+
+    public boolean isExist(long possibleID) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db = this.getReadableDatabase();
+        Cursor cur = db.rawQuery("SELECT * FROM " + PlayerTable.NAME + " WHERE player_id = '" + possibleID + "'", null);
+        boolean exist = (cur.getCount() > 0);
+        cur.close();
+        db.close();
+        return exist;
 
     }
 }

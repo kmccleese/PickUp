@@ -39,4 +39,5 @@ public class ViewDropActivity extends AppCompatActivity {
         int dropID = (int) getIntent().getSerializableExtra(EXTRA_DROP_ID);
         return ViewDropActivityFragment.newInstance(dropID);
     }
+
 }

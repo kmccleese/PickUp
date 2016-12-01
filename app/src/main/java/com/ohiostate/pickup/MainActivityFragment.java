@@ -27,13 +27,25 @@ import java.util.List;
 public class MainActivityFragment extends Fragment {
 
     private static final String TAG = "MainActivityFragment";
+    private static final String ARG_PROFILE = "profile_id";
     private RecyclerView mDropRecyclerView;
     private DropAdapter mAdapter;
+    private long playerID;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        playerID = getArguments().getLong(ARG_PROFILE);
         setHasOptionsMenu(true);
+    }
+
+    public static MainActivityFragment newInstance(long profileID) {
+        Bundle args = new Bundle();
+        args.putLong(ARG_PROFILE, profileID);
+
+        MainActivityFragment fragment = new MainActivityFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
@@ -72,7 +84,7 @@ public class MainActivityFragment extends Fragment {
                 return true;
             case R.id.menu_item_view_profile:
                 // go to view profile
-                Intent intent1 = new Intent(getActivity(), ViewProfile.class);
+                Intent intent1 = ViewProfile.newIntent(getActivity(), playerID);
                 startActivity(intent1);
                 return true;
             case R.id.menu_item_edit_profile:

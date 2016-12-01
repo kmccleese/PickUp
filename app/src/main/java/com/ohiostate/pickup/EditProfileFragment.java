@@ -49,14 +49,12 @@ public class EditProfileFragment extends Fragment {
         if (mPlayer == null){
             mPlayer = new Player(Long.parseLong(Profile.getCurrentProfile().getId()));
         }
-        if (mPlayer == null){
-            mPlayer = new Player(7);
-        }
         setHasOptionsMenu(true);
 
         mClient = new GoogleApiClient.Builder(getActivity()).addApi(LocationServices.API).build();
 
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -132,7 +130,8 @@ public class EditProfileFragment extends Fragment {
                 }
 
                 if (fieldsFilled) {
-                    playerDBHelper.updatePlayer(mPlayer);
+//                    playerDBHelper.updatePlayer(mPlayer);
+                    ProfileFunctionality.get(getActivity()).updateProfle(mPlayer);
                     startActivity(backToViewProfile);
                 }
             }
