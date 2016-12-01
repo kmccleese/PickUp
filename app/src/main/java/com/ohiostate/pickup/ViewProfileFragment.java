@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.facebook.Profile;
+import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 
 import org.w3c.dom.Text;
@@ -31,10 +32,11 @@ public class ViewProfileFragment extends Fragment {
     private TextView mGender;
     private Player mPlayer;
     private Button mEditProfileButton;
+    private ProfileTracker mProfileTracker;
 
-    public static ViewProfileFragment newInstance(int playerID){
+    public static ViewProfileFragment newInstance(long playerID){
         Bundle args = new Bundle();
-        args.putInt(ARG_Profile, playerID);
+        args.putLong(ARG_Profile, playerID);
 
         ViewProfileFragment fragment = new ViewProfileFragment();
         fragment.setArguments(args);
@@ -46,12 +48,24 @@ public class ViewProfileFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        long playerID = Long.parseLong(Profile.getCurrentProfile().getId());
+        if(Profile.getCurrentProfile() == null) {
+            mProfileTracker = new ProfileTracker() {
+                @Override
+                protected void onCurrentProfileChanged(Profile profile, Profile profile2) {
+                    // profile2 is the new profile
+                    Log.v("facebook - profile", profile2.getFirstName());
+                    mProfileTracker.stopTracking();
+                }
+            };
+        } else {
+            long playerID = Long.parseLong(Profile.getCurrentProfile().getId());
 
-        Log.d(TAG,"ID: " + playerID);
 
-        ProfileFunctionality profileFunctionality = ProfileFunctionality.get(getActivity());
-        mPlayer = profileFunctionality.getPlayer(playerID);
+            Log.d(TAG, "ID: " + playerID);
+
+            ProfileFunctionality profileFunctionality = ProfileFunctionality.get(getActivity());
+            mPlayer = profileFunctionality.getPlayer(playerID);
+        }
 
 
 //
@@ -79,7 +93,18 @@ public class ViewProfileFragment extends Fragment {
 
 
         if (mPlayer == null) {
-            mPlayer = new Player(Long.parseLong(Profile.getCurrentProfile().getId()));
+            if(Profile.getCurrentProfile() == null) {
+                mProfileTracker = new ProfileTracker() {
+                    @Override
+                    protected void onCurrentProfileChanged(Profile profile, Profile profile2) {
+                        // profile2 is the new profile
+                        Log.v("facebook - profile", profile2.getFirstName());
+                        mProfileTracker.stopTracking();
+                    }
+                };
+            } else {
+                mPlayer = new Player(Long.parseLong(Profile.getCurrentProfile().getId()));
+            }
             mFirstName.setText("Name");
             mEmail.setText("Email");
             mGender.setText("Gender");

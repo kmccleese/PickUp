@@ -28,11 +28,14 @@ import com.facebook.login.widget.LoginButton;
 import com.ohiostate.pickup.R;
 
 public class LoginActivity extends Activity {
+    private static final String TAG = "LoginActivity";
     private TextView info;
     private LoginButton loginButton;
+    private long playerID;
     Intent intent;
     Context context;
     ProfileFunctionality profileFunctionality;
+
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
@@ -77,7 +80,7 @@ public class LoginActivity extends Activity {
             context = this.getApplicationContext();
             PlayerDatabaseHelper playerDBHelper = new PlayerDatabaseHelper(context);
             profileFunctionality = ProfileFunctionality.get(this);
-            long playerID = Long.parseLong(Profile.getCurrentProfile().getId());
+            playerID = Long.parseLong(Profile.getCurrentProfile().getId());
 
             if(!playerDBHelper.isExist(playerID)){
                 Player player = new Player(playerID);
@@ -88,8 +91,9 @@ public class LoginActivity extends Activity {
 
 
             Log.d("","Logged In. Access token: " + AccessToken.getCurrentAccessToken());
-            intent = new Intent(LoginActivity.this, MainActivity.class);
-            LoginActivity.this.startActivity(intent);
+            Log.d(TAG, "player id = " + playerID);
+            Intent intent = MainActivity.newIntent(this, playerID);
+            startActivity(intent);
             finish();
         }
 
@@ -153,7 +157,7 @@ public class LoginActivity extends Activity {
         Log.d(" ","resultCode:" + resultCode);
         if (resultCode == RESULT_OK) {
             loginButton.setVisibility(View.INVISIBLE);
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            Intent intent = MainActivity.newIntent(this, playerID);
             startActivity(intent);
             finish();
         }

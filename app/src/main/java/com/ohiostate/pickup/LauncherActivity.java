@@ -49,14 +49,15 @@ public class LauncherActivity extends AppCompatActivity {
 
         if (isLoggedIn()) {
             Log.d("","Logged In. Access token: " + AccessToken.getCurrentAccessToken());
-            intent = new Intent(LauncherActivity.this, MainActivity.class);
-            LauncherActivity.this.startActivity(intent);
+            long playerID = Long.parseLong(Profile.getCurrentProfile().getId());
+            Intent intent = MainActivity.newIntent(this, playerID);
+            startActivity(intent);
             finish();
         }
         else{
             Log.d("","NOT Logged In. Access token: " + AccessToken.getCurrentAccessToken());
             intent = new Intent(LauncherActivity.this, LoginActivity.class);
-            LauncherActivity.this.startActivity(intent);
+            startActivity(intent);
             finish();
         }
 
