@@ -4,6 +4,7 @@
     <string name="profile_title">Profile</string>
     <string name="news_feed">This is the news feed. \nThis is where all of our drops will be shown.
     </string>
+    <string name="title_activity_login">Login</string>
     <string name="title_activity_search">Search</string>
     <string name="view_drop">View Drop</string>
     <string name="new_drop">New Drop</string>

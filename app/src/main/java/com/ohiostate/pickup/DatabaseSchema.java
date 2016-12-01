@@ -30,6 +30,7 @@ public class DatabaseSchema {
             public static final String LAST_NAME = "last_name";
             public static final String EMAIL = "email";
             public static final String GENDER = "gender";
+            public static final String ID = "id";
         }
     }
 
