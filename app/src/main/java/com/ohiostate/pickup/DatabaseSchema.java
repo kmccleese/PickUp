@@ -26,6 +26,7 @@ public class DatabaseSchema {
         public static final String NAME = "players";
 
         public static final class Cols {
+            public static final String ID = "player_id";
             public static final String FIRST_NAME = "first_name";
             public static final String LAST_NAME = "last_name";
             public static final String EMAIL = "email";

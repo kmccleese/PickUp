@@ -112,6 +112,8 @@ public class ViewDropActivityFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // creator of drop can edit the drop
+                Intent intent = new Intent(getActivity(), NewDropActivity.class);
+                startActivity(intent);
             }
         });
         mDeleteButton.setOnClickListener(new View.OnClickListener() {

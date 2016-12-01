@@ -50,7 +50,6 @@ public class NewDropActivityFragment extends Fragment {
     private static final int REQUEST_DATE = 0;
     private static final int REQUEST_TIME = 1;
     private Button mDropButton;
-    private Button mShareButton;
     private Button mCancelButton;
     private Button mDateButton;
     private EditText mMessageEditText;
@@ -90,7 +89,6 @@ public class NewDropActivityFragment extends Fragment {
         // instantiate
         drop = new Drop();
         mDropButton = (Button) v.findViewById(R.id.drop_button);
-        mShareButton = (Button) v.findViewById(R.id.share_button);
         mCancelButton = (Button) v.findViewById(R.id.cancel_button);
         mDateButton = (Button) v.findViewById(R.id.new_drop_date_button);
         mMessageEditText = (EditText) v.findViewById(R.id.message_edit_text);
@@ -218,20 +216,22 @@ public class NewDropActivityFragment extends Fragment {
                     Toast.makeText(getContext(), "Please select a sport", Toast.LENGTH_SHORT).show();
                 }
 
+                Toast.makeText(getContext(), "Drop " + drop.getId() + " created", Toast.LENGTH_SHORT).show();
+
             }
         });
-        mShareButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // share drop to Facebook
-            }
-        });
+
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // cancel the creation of this drop
+                Intent cancel = new Intent(getActivity(), MainActivity.class);
+                startActivity(cancel);
             }
+
         });
+
+
         mDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -261,7 +261,6 @@ public class NewDropActivityFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 mMessage = charSequence.toString();
-                drop.setMessage(mMessage);
             }
 
             @Override
