@@ -42,18 +42,6 @@ public class EditProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setHasOptionsMenu(true);
-
-        mClient = new GoogleApiClient.Builder(getActivity()).addApi(LocationServices.API).build();
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        View v = inflater.inflate(R.layout.activity_edit_profile, container, false);
-
         context = getActivity().getApplicationContext();
         playerDBHelper = new PlayerDatabaseHelper(context);
         ProfileFunctionality profileFunctionality = ProfileFunctionality.get(getActivity());
@@ -61,6 +49,17 @@ public class EditProfileFragment extends Fragment {
         if (mPlayer == null){
             mPlayer = new Player(Long.parseLong(Profile.getCurrentProfile().getId()));
         }
+        setHasOptionsMenu(true);
+
+        mClient = new GoogleApiClient.Builder(getActivity()).addApi(LocationServices.API).build();
+
+    }
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        View v = inflater.inflate(R.layout.activity_edit_profile, container, false);
 
         mSaveButton = (Button) v.findViewById(R.id.save_button);
         mCancelButton =(Button) v.findViewById(R.id.cancel_button);

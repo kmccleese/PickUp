@@ -2,18 +2,20 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              android:id="@+id/fragment_container"
-             tools:background="@color/background"
              android:layout_width="match_parent"
              android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:padding="15dp"
             android:orientation="vertical"
             android:id="@+id/drop_info"
-            android:radius="5dp">
+            style="@style/WhiteBackdrop">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -33,6 +35,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/drop_name_text"
+                    style="@style/Texts"
                     android:layout_marginLeft="15dp"/>
 
             </LinearLayout>
@@ -40,58 +43,68 @@
             <TextView
                 android:text="@string/drop_message"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                style="@style/Texts"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/drop_message_text"/>
+                    android:id="@+id/drop_message_text"
+                    style="@style/Texts"/>
 
 
                 <TextView
                     android:text="@string/drop_sport"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    style="@style/Texts"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/drop_sport_text"/>
+                    android:id="@+id/drop_sport_text"
+                    style="@style/Texts"/>
 
 
                 <TextView
                     android:text="@string/drop_difficulty"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    style="@style/Texts"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/drop_difficulty_text"/>
+                    android:id="@+id/drop_difficulty_text"
+                    style="@style/Texts"/>
 
 
                 <TextView
                     android:text="@string/drop_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/drop_date_title_text"/>
+                    android:id="@+id/drop_date_title_text"
+                    style="@style/Texts"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                style="@style/Texts">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/drop_date_text"
-                    android:layout_marginLeft="2dp"/>
+                    android:layout_marginLeft="2dp"
+                    style="@style/Texts"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/drop_time_text"
-                    android:layout_marginLeft="2dp"/>
+                    android:layout_marginLeft="2dp"
+                    style="@style/Texts"/>
 
 
             </LinearLayout>
@@ -99,39 +112,44 @@
                 <TextView
                     android:text="@string/drop_num_players"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    style="@style/Texts"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/drop_num_players_text"/>
+                    android:id="@+id/drop_num_players_text"
+                    style="@style/Texts"/>
 
                 <TextView
                     android:text="@string/drop_preferred_gender"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    style="@style/Texts"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/drop_gender_text"/>
+                    android:id="@+id/drop_gender_text"
+                    style="@style/Texts"/>
 
             <TextView
                 android:text="@string/drop_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/drop_location_text"/>
+                android:id="@+id/drop_location_text"
+                style="@style/Texts"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/app_name"
-                    style="@style/Buttons"
                     android:layout_margin="5dp"
                     android:id="@+id/pickup_button"/>
 
@@ -139,7 +157,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/edit"
-                    style="@style/Buttons"
                     android:layout_margin="5dp"
                     android:id="@+id/edit_button"/>
 
@@ -147,12 +164,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/delete"
-                    style="@style/Buttons"
                     android:layout_margin="5dp"
                     android:id="@+id/delete_button"/>
 
             </LinearLayout>
 
         </LinearLayout>
+
+    </ScrollView>
 
 </FrameLayout>

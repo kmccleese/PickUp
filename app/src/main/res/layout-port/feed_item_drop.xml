@@ -3,9 +3,8 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
                 android:layout_marginTop="5dp"
-                tools:background="@drawable/backdrop">
+                style="@style/WhiteBackdrop">
 
     <ImageView
         android:layout_width="50dp"
@@ -22,7 +21,8 @@
         android:layout_toRightOf="@id/photo"
         android:layout_marginLeft="5dp"
         tools:text="Drop Name"
-        android:id="@+id/name_text"/>
+        android:id="@+id/name_text"
+        style="@style/Texts"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -30,6 +30,7 @@
         android:layout_below="@id/photo"
         android:layout_marginTop="5dp"
         tools:text="Drop Message"
+        style="@style/Texts"
         android:id="@+id/drop_message_text"/>
 
     <TextView
@@ -38,14 +39,16 @@
         android:layout_below="@id/drop_message_text"
         android:layout_alignParentLeft="true"
         tools:text="Drop Sport"
+        style="@style/Texts"
         android:id="@+id/drop_sport_text"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/drop_sport_text"
         android:layout_alignParentLeft="true"
         tools:text="Drop Date"
+        style="@style/Texts"
         android:id="@+id/drop_date_text"/>
 
 </RelativeLayout>

@@ -50,7 +50,6 @@ public class NewDropActivityFragment extends Fragment {
     private static final int REQUEST_DATE = 0;
     private static final int REQUEST_TIME = 1;
     private Button mDropButton;
-    private Button mShareButton;
     private Button mCancelButton;
     private Button mDateButton;
     private EditText mMessageEditText;
@@ -72,6 +71,7 @@ public class NewDropActivityFragment extends Fragment {
     private Button logoutButton;
     private GoogleApiClient mClient;
     private Button locationButton;
+    private String location;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,7 +89,6 @@ public class NewDropActivityFragment extends Fragment {
         // instantiate
         drop = new Drop();
         mDropButton = (Button) v.findViewById(R.id.drop_button);
-        mShareButton = (Button) v.findViewById(R.id.share_button);
         mCancelButton = (Button) v.findViewById(R.id.cancel_button);
         mDateButton = (Button) v.findViewById(R.id.new_drop_date_button);
         mMessageEditText = (EditText) v.findViewById(R.id.message_edit_text);
@@ -110,6 +109,9 @@ public class NewDropActivityFragment extends Fragment {
                 android.R.layout.simple_spinner_item);
         sportAdapater.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sportSpinner.setAdapter(sportAdapater);
+        if(drop.getSport() != null) {
+            sportSpinner.setPrompt(drop.getSport());
+        }
         sportSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 mSport = parent.getItemAtPosition(pos).toString();
@@ -158,47 +160,78 @@ public class NewDropActivityFragment extends Fragment {
 
                 if (sportSpinner.getSelectedItemId() != 0) {
                     drop.setSport(mSport);
+
+                    if(difficultySpinner.getSelectedItemId() != 0) {
+                        drop.setDifficulty(mDifficulty);
+
+                        if(drop.getDate() != null) {
+                            // date gets set in onActivityResult
+
+                            if(drop.getPlay_time() != null) {
+                                // time gets set in onActivityResult
+
+                                if(mNumPlayers != null) {
+                                    drop.setNum_players(mNumPlayers);
+
+                                    if(genderSpinner.getSelectedItemId() != 0) {
+                                        drop.setGender(mGender);
+
+                                        if (location != null) {
+                                            drop.setLocation(location);
+
+                                            if (mMessage != null) {
+                                                drop.setMessage(mMessage);
+
+                                                DropFunctionality.get(getActivity()).addDrop(drop);
+                                                Intent dropped = new Intent(getActivity(), MainActivity.class);
+                                                startActivity(dropped);
+                                            } else {
+                                                Toast.makeText(getContext(), "Please select a date", Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        } else {
+                                            Toast.makeText(getContext(), "Please enter location", Toast.LENGTH_SHORT).show();
+                                        }
+
+                                    } else {
+                                            Toast.makeText(getContext(), "Please select a gender", Toast.LENGTH_SHORT).show();
+                                        }
+                                } else {
+                                    Toast.makeText(getContext(), "Please enter number of players", Toast.LENGTH_SHORT).show();
+                                }
+
+                            } else {
+                                Toast.makeText(getContext(), "Please select a date", Toast.LENGTH_SHORT).show();
+                            }
+
+                        } else {
+                            Toast.makeText(getContext(), "Please select a date", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else{
+                        Toast.makeText(getContext(), "Please select a skill level", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else{
                     Toast.makeText(getContext(), "Please select a sport", Toast.LENGTH_SHORT).show();
                 }
-                if(difficultySpinner.getSelectedItemId() != 0) {
-                    drop.setDifficulty(mDifficulty);
-                }
-                else{
-                    Toast.makeText(getContext(), "Please select a skill level", Toast.LENGTH_SHORT).show();
-
-                }
-
-
-                drop.setMessage(mMessage);
-                // drop.setNum_players(mNumPlayers);
-                if(genderSpinner.getSelectedItemId() != 0) {
-                    drop.setGender(mGender);
-                }
-                else {
-                    Toast.makeText(getContext(), "Please select a gender", Toast.LENGTH_SHORT).show();
-
-                }
-                drop.setLocation(mLocationField.toString());
-                //date and time set in updated onActivityResult
-                DropFunctionality.get(getActivity()).addDrop(drop);
 
                 Toast.makeText(getContext(), "Drop " + drop.getId() + " created", Toast.LENGTH_SHORT).show();
+
             }
         });
-        mShareButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // share drop to Facebook
-            }
-        });
+
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // cancel the creation of this drop
+                Intent cancel = new Intent(getActivity(), MainActivity.class);
+                startActivity(cancel);
             }
+
         });
+
+
         mDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -277,8 +310,14 @@ public class NewDropActivityFragment extends Fragment {
                     Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
                     try {
                         List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
-                        mLocationField.setText(addresses.get(0).getAddressLine(0) + ", " + addresses.get(0).getAddressLine(1));
+                        if(addresses.size() != 0) {
+                            location = addresses.get(0).getAddressLine(0) + ", " + addresses.get(0).getAddressLine(1);
+                            mLocationField.setText(location);
+                            drop.setLocation(location);
                         Log.d("Your Location is: ", geocoder.getFromLocation(latitude, longitude, 1).toString());
+                        } else {
+                            mLocationField.setText("App does not have permission for location");
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
